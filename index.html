@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ECRU LABEL — Reimagined</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&family=Italiana&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ecru:#f4efe6;
+  --ecru-deep:#ece4d4;
+  --bone:#faf7f1;
+  --sand:#d9cbb4;
+  --taupe:#a89880;
+  --cocoa:#6b5d4b;
+  --ink:#211c15;
+  --gold:#b39364;
+  --serif:'Cormorant Garamond',serif;
+  --display:'Italiana',serif;
+  --sans:'Jost',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--ecru);color:var(--ink);font-family:var(--sans);font-weight:300;overflow-x:hidden}
+::selection{background:var(--gold);color:#fff}
+
+/* ---------- Preloader ---------- */
+#loader{position:fixed;inset:0;background:var(--ecru);z-index:200;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:18px;transition:opacity 1.1s ease,visibility 1.1s}
+#loader.done{opacity:0;visibility:hidden}
+#loader .brand{font-family:var(--display);font-size:clamp(2.4rem,7vw,4.6rem);letter-spacing:.42em;text-indent:.42em}
+#loader .brand span{opacity:0;display:inline-block;animation:letterIn 1s cubic-bezier(.2,.7,.3,1) forwards}
+#loader .line{width:0;height:1px;background:var(--gold);animation:lineGrow 1.8s .4s ease forwards}
+#loader small{letter-spacing:.5em;text-indent:.5em;font-size:.62rem;text-transform:uppercase;color:var(--taupe);opacity:0;animation:fadeIn 1s 1.1s forwards}
+@keyframes letterIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes lineGrow{to{width:180px}}
+@keyframes fadeIn{to{opacity:1}}
+
+/* ---------- Announcement + Nav ---------- */
+.announce{background:var(--ink);color:var(--ecru);font-size:.66rem;letter-spacing:.35em;text-transform:uppercase;padding:.65rem 0;overflow:hidden;white-space:nowrap}
+.announce .track{display:inline-block;animation:marquee 28s linear infinite}
+.announce span{margin:0 3.2rem}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.15rem clamp(1.2rem,4vw,3.4rem);background:rgba(244,239,230,.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(107,93,75,.14)}
+nav .links{display:flex;gap:clamp(.9rem,2.4vw,2.2rem);font-size:.72rem;letter-spacing:.28em;text-transform:uppercase}
+nav a{color:var(--ink);text-decoration:none;position:relative;padding:.2rem 0}
+nav a::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:1px;background:var(--gold);transition:width .45s cubic-bezier(.2,.7,.3,1)}
+nav a:hover::after{width:100%}
+nav .logo{font-family:var(--display);font-size:1.55rem;letter-spacing:.4em;text-indent:.4em;position:absolute;left:50%;transform:translateX(-50%)}
+nav .util{display:flex;gap:1.6rem;font-size:.72rem;letter-spacing:.28em;text-transform:uppercase}
+@media(max-width:820px){nav .links{display:none}nav .logo{position:static;transform:none}}
+
+/* ---------- HERO : living triptych, fully centred ---------- */
+.hero{position:relative;min-height:calc(100vh - 96px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:clamp(1.6rem,3.5vh,3rem) 1.4rem clamp(2rem,4vh,3rem);overflow:hidden;
+  background:
+    radial-gradient(ellipse 60% 42% at 50% 78%, rgba(179,147,100,.14), transparent 70%),
+    radial-gradient(ellipse 90% 70% at 50% 30%, rgba(250,247,241,.9), transparent 75%),
+    linear-gradient(180deg, var(--bone) 0%, var(--ecru) 46%, var(--ecru-deep) 100%)}
+/* film grain */
+.hero .grain{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.5;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.42 0 0 0 0 0.36 0 0 0 0 0.29 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+/* couture double frame */
+.hero .frameline{position:absolute;inset:clamp(.9rem,2vw,1.6rem);z-index:2;pointer-events:none;border:1px solid rgba(107,93,75,.22)}
+.hero .frameline::after{content:"";position:absolute;inset:6px;border:1px solid rgba(179,147,100,.35)}
+/* golden aura behind the centre model */
+.hero .aura{position:absolute;left:50%;top:58%;transform:translate(-50%,-50%);width:min(58vw,760px);aspect-ratio:1;z-index:1;pointer-events:none;border-radius:50%;
+  background:radial-gradient(circle, rgba(179,147,100,.20) 0%, rgba(179,147,100,.08) 42%, transparent 68%);
+  animation:auraBreathe 8s ease-in-out infinite}
+@keyframes auraBreathe{0%,100%{opacity:.75;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.06)}}
+/* slow light sweep across the stage */
+.hero .sweep{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.hero .sweep::before{content:"";position:absolute;top:-20%;bottom:-20%;left:-30%;width:34%;transform:skewX(-14deg);
+  background:linear-gradient(90deg, transparent, rgba(250,247,241,.5) 50%, transparent);
+  animation:sweep 11s ease-in-out infinite}
+@keyframes sweep{0%,55%{left:-40%}85%,100%{left:125%}}
+/* runway floor under the arches */
+.triptych::after{content:"";position:absolute;left:50%;bottom:-2.4rem;transform:translateX(-50%);width:118%;height:4.5rem;border-radius:50%;z-index:-1;
+  background:radial-gradient(ellipse at center, rgba(107,93,75,.20) 0%, rgba(107,93,75,.07) 45%, transparent 72%)}
+.hero .ghost{position:fixed;top:clamp(5rem,12vh,8rem);left:50%;transform:translateX(-50%);font-family:var(--display);font-size:clamp(5rem,17vw,15rem);letter-spacing:.18em;text-indent:.18em;color:transparent;-webkit-text-stroke:1px rgba(107,93,75,.13);user-select:none;pointer-events:none;white-space:nowrap;line-height:1;z-index:0}
+.hero .eyebrow{font-size:.68rem;letter-spacing:.55em;text-indent:.55em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;opacity:0;animation:riseIn 1.2s .3s cubic-bezier(.2,.7,.3,1) forwards;position:relative;z-index:3}
+.hero h1{font-family:var(--serif);font-weight:300;font-size:clamp(2rem,4.4vw,3.6rem);line-height:1.08;max-width:26ch;margin:0 auto;text-wrap:balance;opacity:0;animation:riseIn 1.2s .5s cubic-bezier(.2,.7,.3,1) forwards;position:relative;z-index:3}
+.hero h1 em{font-style:italic;color:var(--cocoa)}
+@keyframes riseIn{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
+.triptych{display:flex;align-items:flex-end;justify-content:center;gap:clamp(1rem,3vw,2.4rem);margin:clamp(1.4rem,3.5vh,2.4rem) auto 0;position:relative;z-index:3}
+.arch{position:relative;overflow:hidden;border-radius:999px 999px 14px 14px;background:var(--ecru-deep);box-shadow:0 30px 60px -30px rgba(33,28,21,.45);opacity:0;transform:translateY(50px)}
+.arch.show{animation:riseIn 1.4s cubic-bezier(.2,.7,.3,1) forwards}
+.arch video,.arch img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;display:block}
+.arch.side{height:clamp(240px,42vh,420px);aspect-ratio:9/15.5;width:auto;animation-name:none}
+.arch.main{height:clamp(300px,52vh,520px);aspect-ratio:9/14.5;width:auto;outline:1px solid var(--gold);outline-offset:10px}
+.arch.show{animation:riseIn 1.4s cubic-bezier(.2,.7,.3,1) forwards,archFloat 9s 2.2s ease-in-out infinite}
+@keyframes archFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.arch .tag{position:absolute;left:50%;bottom:1rem;transform:translateX(-50%);z-index:4;background:rgba(250,247,241,.92);font-size:.56rem;letter-spacing:.3em;text-indent:.3em;text-transform:uppercase;padding:.55rem 1.1rem;white-space:nowrap;color:var(--ink)}
+.hero .cta-row{display:flex;gap:1.4rem;margin-top:clamp(1.4rem,3.5vh,2.2rem);justify-content:center;flex-wrap:wrap;position:relative;z-index:3;opacity:0;animation:riseIn 1.2s 1s cubic-bezier(.2,.7,.3,1) forwards}
+.btn{display:inline-block;text-decoration:none;font-size:.7rem;letter-spacing:.34em;text-indent:.34em;text-transform:uppercase;padding:1.05rem 2.6rem;border:1px solid var(--ink);color:var(--ink);position:relative;overflow:hidden;transition:color .5s;z-index:1}
+.btn::before{content:"";position:absolute;inset:0;background:var(--ink);transform:translateY(101%);transition:transform .5s cubic-bezier(.2,.7,.3,1);z-index:-1}
+.btn:hover{color:var(--ecru)}
+.btn:hover::before{transform:translateY(0)}
+@media(max-width:640px){.arch.side{display:none}.arch.main{width:min(72vw,320px)}}
+
+/* ---------- Ticker ---------- */
+.ticker{background:var(--ecru-deep);border-top:1px solid rgba(107,93,75,.16);border-bottom:1px solid rgba(107,93,75,.16);padding:1.3rem 0;overflow:hidden;white-space:nowrap}
+.ticker .track{display:inline-block;animation:marquee 36s linear infinite}
+.ticker span{font-family:var(--serif);font-style:italic;font-size:1.5rem;color:var(--cocoa);margin:0 2.6rem}
+.ticker b{font-family:var(--sans);font-weight:300;font-size:.7rem;letter-spacing:.4em;text-transform:uppercase;vertical-align:middle;color:var(--gold)}
+
+/* ---------- Sections : centred composition ---------- */
+section{padding:clamp(4rem,9vw,7.5rem) clamp(1.2rem,4.5vw,4rem)}
+.sec-head{text-align:center;margin:0 auto clamp(2.6rem,5vw,4.2rem);max-width:760px}
+.sec-head .kicker{font-size:.66rem;letter-spacing:.55em;text-indent:.55em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:1rem}
+.sec-head h2{font-family:var(--serif);font-weight:300;font-size:clamp(2.2rem,5.5vw,4.2rem);line-height:1.02}
+.sec-head h2 em{font-style:italic;color:var(--cocoa)}
+.sec-head .lede{margin-top:1.1rem;color:var(--cocoa);font-size:.92rem;letter-spacing:.06em;line-height:1.8}
+.sec-foot{text-align:center;margin-top:clamp(2.4rem,5vw,3.6rem)}
+.view-all{font-size:.7rem;letter-spacing:.32em;text-indent:.32em;text-transform:uppercase;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:.4rem}
+
+/* ---------- Grid & living cards ---------- */
+.grid{display:flex;flex-wrap:wrap;gap:clamp(1.6rem,3vw,2.6rem);justify-content:center;max-width:1360px;margin:0 auto}
+.card{position:relative;text-decoration:none;color:var(--ink);text-align:center;flex:0 1 300px;max-width:330px;min-width:260px;opacity:0;transform:translateY(46px);transition:opacity 1.1s ease,transform 1.1s cubic-bezier(.2,.7,.3,1)}
+@media(max-width:640px){.card{flex-basis:100%;max-width:420px}}
+.card.inview{opacity:1;transform:none}
+.frame{position:relative;overflow:hidden;aspect-ratio:3/4.35;background:var(--ecru-deep);border-radius:6px}
+.frame video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;transition:transform 1.2s cubic-bezier(.2,.7,.3,1)}
+.card:hover .frame video{transform:scale(1.045)}
+.frame .ph{position:absolute;inset:-6%;background-size:cover;background-position:center center;opacity:0;transition:opacity 2.4s ease;will-change:transform,opacity}
+.frame .ph.on{opacity:1}
+.frame .ph.zoomA{animation:driftA 12s ease-out forwards}
+.frame .ph.zoomB{animation:driftB 12s ease-out forwards}
+@keyframes driftA{from{transform:scale(1)}to{transform:scale(1.14)}}
+@keyframes driftB{from{transform:scale(1.06)}to{transform:scale(1.18)}}
+.frame .veil{position:absolute;inset:0;background:linear-gradient(180deg,transparent 62%,rgba(33,28,21,.34));opacity:0;transition:opacity .6s;z-index:3}
+.card:hover .veil{opacity:1}
+.frame .quick{position:absolute;left:50%;bottom:1.4rem;transform:translate(-50%,18px);opacity:0;background:rgba(250,247,241,.94);color:var(--ink);font-size:.62rem;letter-spacing:.32em;text-indent:.32em;text-transform:uppercase;padding:.85rem 1.9rem;transition:all .5s cubic-bezier(.2,.7,.3,1);white-space:nowrap;z-index:4}
+.card:hover .quick{opacity:1;transform:translate(-50%,0)}
+.badge{position:absolute;top:1.1rem;left:50%;transform:translateX(-50%);z-index:5;background:var(--ink);color:var(--ecru);font-size:.58rem;letter-spacing:.3em;text-indent:.3em;text-transform:uppercase;padding:.5rem 1.1rem}
+.badge.gold{background:var(--gold)}
+.badge.film{background:rgba(250,247,241,.92);color:var(--ink)}
+.meta{padding:1.3rem .4rem 0}
+.meta h3{font-family:var(--serif);font-weight:500;font-size:1.3rem;line-height:1.25}
+.meta .price{display:block;margin-top:.45rem;font-size:.86rem;letter-spacing:.16em}
+.meta .price s{color:var(--taupe);margin-right:.5rem;font-weight:200}
+.dots{display:flex;gap:.42rem;justify-content:center;padding:.85rem 0 0}
+.dots i{width:5px;height:5px;border-radius:50%;background:var(--sand);transition:background .5s,transform .5s}
+.dots i.on{background:var(--cocoa);transform:scale(1.25)}
+
+/* ---------- Editorial interludes ---------- */
+.editorial{position:relative;height:82vh;min-height:520px;overflow:hidden;padding:0}
+.editorial .bg{position:absolute;inset:-12% 0;background-size:cover;background-position:center center;will-change:transform}
+.editorial::after{content:"";position:absolute;inset:0;background:rgba(33,28,21,.36)}
+.editorial .inner{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 1.4rem}
+.editorial .inner p{color:var(--ecru);font-size:.68rem;letter-spacing:.52em;text-indent:.52em;text-transform:uppercase;margin-bottom:1.3rem}
+.editorial .inner h2{font-family:var(--serif);font-weight:300;font-style:italic;color:var(--bone);font-size:clamp(2.2rem,6vw,4.8rem);max-width:20ch;line-height:1.12}
+
+/* ---------- Values ---------- */
+.values{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,260px));gap:2.5rem;text-align:center;justify-content:center}
+.values .v{opacity:0;transform:translateY(30px);transition:all 1s cubic-bezier(.2,.7,.3,1)}
+.values .v.inview{opacity:1;transform:none}
+.values .n{font-family:var(--serif);font-style:italic;font-size:2.2rem;color:var(--gold)}
+.values h4{font-size:.74rem;letter-spacing:.34em;text-indent:.34em;text-transform:uppercase;margin:.9rem 0 .7rem;font-weight:400}
+.values p{font-size:.86rem;color:var(--cocoa);line-height:1.75;max-width:30ch;margin:0 auto}
+
+/* ---------- Footer ---------- */
+footer{background:var(--ink);color:var(--ecru);padding:clamp(3.4rem,7vw,5.5rem) clamp(1.4rem,4.5vw,4rem) 2.4rem;text-align:center}
+footer .brand{font-family:var(--display);font-size:2.1rem;letter-spacing:.4em;text-indent:.4em}
+footer .tag{font-family:var(--serif);font-style:italic;color:var(--sand);margin:1rem auto 0;font-size:1.05rem;max-width:34ch;line-height:1.6}
+footer .cols{display:flex;justify-content:center;gap:clamp(2.4rem,7vw,6rem);flex-wrap:wrap;margin:3rem 0;padding:2.6rem 0;border-top:1px solid rgba(244,239,230,.14);border-bottom:1px solid rgba(244,239,230,.14)}
+footer h5{font-size:.68rem;letter-spacing:.4em;text-indent:.4em;text-transform:uppercase;color:var(--taupe);margin-bottom:1.2rem;font-weight:400}
+footer ul{list-style:none}
+footer li{margin-bottom:.7rem}
+footer a{color:var(--ecru);text-decoration:none;font-size:.84rem;letter-spacing:.06em;opacity:.85;transition:.3s}
+footer a:hover{opacity:1;color:var(--gold)}
+footer .base{font-size:.64rem;letter-spacing:.28em;text-indent:.28em;text-transform:uppercase;color:var(--taupe)}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.2s !important}
+}
+</style>
+</head>
+<body>
+
+<div id="loader" aria-hidden="true">
+  <div class="brand"><span style="animation-delay:.05s">E</span><span style="animation-delay:.15s">C</span><span style="animation-delay:.25s">R</span><span style="animation-delay:.35s">U</span></div>
+  <div class="line"></div>
+  <small>Label &mdash; London</small>
+</div>
+
+<div class="announce" aria-hidden="true">
+  <div class="track">
+    <span>Fast Worldwide Shipping</span><span>&bull;</span><span>Designed in London</span><span>&bull;</span><span>Premium Textured Knits</span><span>&bull;</span><span>New Collection Live</span><span>&bull;</span>
+    <span>Fast Worldwide Shipping</span><span>&bull;</span><span>Designed in London</span><span>&bull;</span><span>Premium Textured Knits</span><span>&bull;</span><span>New Collection Live</span><span>&bull;</span>
+  </div>
+</div>
+
+<nav>
+  <div class="links">
+    <a href="#dresses">Dresses</a>
+    <a href="#sets">Sets</a>
+    <a href="#outerwear">Outerwear</a>
+  </div>
+  <div class="logo">ECRU LABEL</div>
+  <div class="util">
+    <a href="https://ecrulabel.co.uk/search" style="text-decoration:none;color:inherit">Search</a>
+    <a href="https://ecrulabel.co.uk/cart" style="text-decoration:none;color:inherit">Cart (0)</a>
+  </div>
+</nav>
+
+<!-- ================= HERO : THE LIVING TRIPTYCH ================= -->
+<header class="hero" id="top">
+  <div class="ghost" aria-hidden="true">ECRU</div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="aura" aria-hidden="true"></div>
+  <div class="sweep" aria-hidden="true"></div>
+  <div class="frameline" aria-hidden="true"></div>
+  <p class="eyebrow">The New Collection &mdash; In Motion</p>
+  <h1>She doesn&rsquo;t just wear it.<br>She <em>moves</em> in it.</h1>
+
+  <div class="triptych">
+    <div class="arch side" style="animation-delay:.9s">
+      <video src="https://d8j0ntlcm91z4.cloudfront.net/user_33nbDu5HAv3Pu2Q9BsD6H2SK98Q/hf_20260706_214803_8d33c883-6ca6-4464-92de-5f6d53e5fb93.mp4" muted loop playsinline autoplay poster="https://cdn.shopify.com/s/files/1/0598/0851/4221/files/220415_Ecru_SS22_662_05094a06-d959-4797-9170-30eb552e283f.jpg?v=1704643934&width=600"></video>
+      <span class="tag">The Sia</span>
+    </div>
+    <div class="arch main" style="animation-delay:.7s">
+      <video src="https://d8j0ntlcm91z4.cloudfront.net/user_33nbDu5HAv3Pu2Q9BsD6H2SK98Q/hf_20260706_214752_016a5a2d-ccc0-43fa-a1ed-df6c669ee54b.mp4" muted loop playsinline autoplay poster="https://cdn.shopify.com/s/files/1/0598/0851/4221/files/250702_EcruLabel_352.jpg?v=1754920487&width=800"></video>
+      <span class="tag">Soft Butter &mdash; New In</span>
+    </div>
+    <div class="arch side" style="animation-delay:1.1s">
+      <video src="https://d8j0ntlcm91z4.cloudfront.net/user_33nbDu5HAv3Pu2Q9BsD6H2SK98Q/hf_20260706_214815_5243ef21-9fc1-4532-9838-5e4cc590caa5.mp4" muted loop playsinline autoplay poster="https://cdn.shopify.com/s/files/1/0598/0851/4221/products/211030_ECRU_138_9a47c364-4685-4727-98ea-b1f820d9e66c.jpg?v=1713791124&width=600"></video>
+      <span class="tag">Barely Beige</span>
+    </div>
+  </div>
+
+  <div class="cta-row">
+    <a class="btn" href="#dresses">Shop The Film</a>
+  </div>
+</header>
+
+<div class="ticker" aria-hidden="true">
+  <div class="track">
+    <span>affordable luxury</span><b>&#10022;</b><span>premium knit co-ords</span><b>&#10022;</b><span>birthday &amp; evening dresses</span><b>&#10022;</b><span>designed in london</span><b>&#10022;</b>
+    <span>affordable luxury</span><b>&#10022;</b><span>premium knit co-ords</span><b>&#10022;</b><span>birthday &amp; evening dresses</span><b>&#10022;</b><span>designed in london</span><b>&#10022;</b>
+  </div>
+</div>
+
+<!-- ================= DRESSES (all in motion) ================= -->
+<section id="dresses">
+  <div class="sec-head">
+    <span class="kicker">Chapter One &mdash; In Motion</span>
+    <h2>The <em>Dresses</em></h2>
+    <p class="lede">Every model filmed in slow motion. Watch the fabric move before it&rsquo;s yours.</p>
+  </div>
+  <div class="grid">
+
+    <a class="card" href="https://ecrulabel.co.uk/collections/frontpage/products/beaded-soft-butter-dress">
+      <span class="badge gold">New In</span>
+      <div class="frame">
+        <video src="https://d8j0ntlcm91z4.cloudfront.net/user_33nbDu5HAv3Pu2Q9BsD6H2SK98Q/hf_20260706_214752_016a5a2d-ccc0-43fa-a1ed-df6c669ee54b.mp4" muted loop playsinline autoplay poster="https://cdn.shopify.com/s/files/1/0598/0851/4221/files/250702_EcruLabel_352.jpg?v=1754920487&width=800"></video>
+        <div class="veil"></div><span class="quick">Discover</span>
+      </div>
+      <div class="meta"><h3>Beaded Soft Butter Dress</h3><span class="price">&pound;70</span></div>
+    </a>
+
+    <a class="card" href="https://ecrulabel.co.uk/collections/frontpage/products/textured-sia-halterneck-dress">
+      <div class="frame">
+        <video src="https://d8j0ntlcm91z4.cloudfront.net/user_33nbDu5HAv3Pu2Q9BsD6H2SK98Q/hf_20260706_214803_8d33c883-6ca6-4464-92de-5f6d53e5fb93.mp4" muted loop playsinline autoplay poster="https://cdn.shopify.com/s/files/1/0598/0851/4221/files/220415_Ecru_SS22_662_05094a06-d959-4797-9170-30eb552e283f.jpg?v=1704643934&width=800"></video>
+        <div class="veil"></div><span class="quick">Discover</span>
+      </div>
+      <div class="meta"><h3>Textured Sia Multiway Mini Black Dress</h3><span class="price">&pound;60</span></div>
+    </a>
+
+    <a class="card" href="https://ecrulabel.co.uk/collections/frontpage/products/barely-beige-cut-out-rope-dress">
+      <div class="frame">
+        <video src="https://d8j0ntlcm91z4.cloudfront.net/user_33nbDu5HAv3Pu2Q9BsD6H2SK98Q/hf_20260706_214815_5243ef21-9fc1-4532-9838-5e4cc590caa5.mp4" muted loop playsinline autoplay poster="https://cdn.shopify.com/s/files/1/0598/0851/4221/products/211030_ECRU_138_9a47c364-4685-4727-98ea-b1f820d9e66c.jpg?v=1713791124&width=800"></video>
+        <div class="veil"></div><span class="quick">Discover</span>
+      </div>
+      <div class="meta"><h3>Barely Beige Cut Out Rope Dress</h3><span class="price">&pound;70</span></div>
+    </a>
+
+    <a class="card" href="https://ecrulabel.co.uk/collections/frontpage/products/pistachio-textured-wrap-mini-dress">
+      <div class="frame">
+        <video src="https://d8j0ntlcm91z4.cloudfront.net/user_33nbDu5HAv3Pu2Q9BsD6H2SK98Q/hf_20260706_214825_e3e9f71d-1c38-43ff-ab7f-b424849e9d47.mp4" muted loop playsinline autoplay poster="https://cdn.shopify.com/s/files/1/0598/0851/4221/products/221127_Ecru_145_e7fb6f2e-e07f-4182-9b1b-7e0a7e14eec9.jpg?v=1704644071&width=800"></video>
+        <div class="veil"></div><span class="quick">Discover</span>
+      </div>
+      <div class="meta"><h3>Pistachio Textured Multiway Wrap Mini Dress</h3><span class="price">&pound;75</span></div>
+    </a>
+
+    <a class="card" href="https://ecrulabel.co.uk/collections/frontpage/products/sand-embroidered-suede-dress">
+      <span class="badge">On Sale</span>
+      <div class="frame">
+        <video src="https://d8j0ntlcm91z4.cloudfront.net/user_33nbDu5HAv3Pu2Q9BsD6H2SK98Q/hf_20260706_214836_59774ee9-ea8d-4f18-9aaf-f7d1a961e07b.mp4" muted loop playsinline autoplay poster="https://cdn.shopify.com/s/files/1/0598/0851/4221/products/211030_ECRU_381.jpg?v=1685805155&width=800"></video>
+        <div class="veil"></div><span class="quick">Discover</span>
+      </div>
+      <div class="meta"><h3>Sand Embroidered Suede Dress</h3><span class="price"><s>&pound;55</s>&pound;25</span></div>
+    </a>
+
+  </div>
+  <div class="sec-foot"><a class="view-all" href="https://ecrulabel.co.uk/collections/frontpage">View the full collection</a></div>
+</section>
+
+<!-- ================= EDITORIAL 1 ================= -->
+<section class="editorial">
+  <div class="bg" data-parallax data-bg="https://cdn.shopify.com/s/files/1/0598/0851/4221/files/250702_EcruLabel_426copy.jpg?v=1754737851&width=2200"></div>
+  <div class="inner">
+    <p>The Philosophy</p>
+    <h2>&ldquo;Fabric that sculpts, tones that soften &mdash; every piece designed to move with you.&rdquo;</h2>
+  </div>
+</section>
+
+<!-- ================= SETS ================= -->
+<section id="sets">
+  <div class="sec-head">
+    <span class="kicker">Chapter Two</span>
+    <h2>Sets &amp; <em>Co-ords</em></h2>
+  </div>
+  <div class="grid">
+
+    <a class="card" href="https://ecrulabel.co.uk/collections/frontpage/products/textured-tulum-trio-bralet">
+      <div class="frame" data-images='["https://cdn.shopify.com/s/files/1/0598/0851/4221/files/IMG_5878_b68c09d0-1f55-4d57-88a0-d02e00a89c15.jpg?v=1684139429&width=1000","https://cdn.shopify.com/s/files/1/0598/0851/4221/files/220415_Ecru_SS22_501_9321f828-c485-4310-b012-67a6e255c1ab.jpg?v=1684139506&width=1000"]'>
+        <div class="veil"></div><span class="quick">Discover</span>
+      </div>
+      <div class="meta"><h3>Textured Tulum Trio Bralet &amp; Top</h3><span class="price">&pound;30</span></div>
+      <div class="dots"></div>
+    </a>
+
+    <a class="card" href="https://ecrulabel.co.uk/products/textured-trio-set">
+      <div class="frame" data-images='["https://cdn.shopify.com/s/files/1/0598/0851/4221/products/220415_Ecru_SS22_511.jpg?v=1684139399&width=1000","https://cdn.shopify.com/s/files/1/0598/0851/4221/products/220415_Ecru_SS22_501.jpg?v=1684139399&width=1000","https://cdn.shopify.com/s/files/1/0598/0851/4221/products/220415_Ecru_SS22_484.jpg?v=1684139399&width=1000","https://cdn.shopify.com/s/files/1/0598/0851/4221/products/220415_Ecru_SS22_517.jpg?v=1684139241&width=1000"]'>
+        <div class="veil"></div><span class="quick">Discover</span>
+      </div>
+      <div class="meta"><h3>Textured Tulum Trio Skirt</h3><span class="price">&pound;30</span></div>
+      <div class="dots"></div>
+    </a>
+
+    <a class="card" href="https://ecrulabel.co.uk/products/deep-ocean-ribbed-two-piece-set">
+      <div class="frame" data-images='["https://cdn.shopify.com/s/files/1/0598/0851/4221/products/3O7A1849.jpg?v=1641987516&width=1000","https://cdn.shopify.com/s/files/1/0598/0851/4221/products/3O7A1868.jpg?v=1641986317&width=1000","https://cdn.shopify.com/s/files/1/0598/0851/4221/products/649cf5_564da11e8cbe403daf718af337e4ba6a_mv2.jpg?v=1631711124&width=1000"]'>
+        <div class="veil"></div><span class="quick">Discover</span>
+      </div>
+      <div class="meta"><h3>Deep Ocean Ribbed Two Piece Set</h3><span class="price">&pound;55</span></div>
+      <div class="dots"></div>
+    </a>
+
+    <a class="card" href="https://ecrulabel.co.uk/products/textured-cocoa-crossover-two-piece-set">
+      <div class="frame" data-images='["https://cdn.shopify.com/s/files/1/0598/0851/4221/products/3O7A1254.jpg?v=1641987298&width=1000","https://cdn.shopify.com/s/files/1/0598/0851/4221/products/2_818f4f97-b6c5-4ce9-9812-e0235fad8644.jpg?v=1649859620&width=1000","https://cdn.shopify.com/s/files/1/0598/0851/4221/products/3_47de9c12-ae40-46c7-897a-3648eb8a2a72.jpg?v=1649859620&width=1000","https://cdn.shopify.com/s/files/1/0598/0851/4221/products/4.jpg?v=1649859620&width=1000"]'>
+        <div class="veil"></div><span class="quick">Discover</span>
+      </div>
+      <div class="meta"><h3>Textured Cocoa Crossover Wrap Set</h3><span class="price">&pound;75</span></div>
+      <div class="dots"></div>
+    </a>
+
+  </div>
+  <div class="sec-foot"><a class="view-all" href="https://ecrulabel.co.uk/collections/frontpage">View the full collection</a></div>
+</section>
+
+<!-- ================= EDITORIAL 2 ================= -->
+<section class="editorial">
+  <div class="bg" data-parallax data-bg="https://cdn.shopify.com/s/files/1/0598/0851/4221/files/231229_Ecru_074.jpg?v=1708464080&width=2200"></div>
+  <div class="inner">
+    <p>Layer Season</p>
+    <h2>&ldquo;Oversized silhouettes. Soft, grounding neutrals. Warmth worn beautifully.&rdquo;</h2>
+  </div>
+</section>
+
+<!-- ================= OUTERWEAR ================= -->
+<section id="outerwear">
+  <div class="sec-head">
+    <span class="kicker">Chapter Three</span>
+    <h2>The <em>Outerwear</em></h2>
+  </div>
+  <div class="grid">
+
+    <a class="card" href="https://ecrulabel.co.uk/collections/frontpage/products/desert-oversized-aviator-jacket">
+      <span class="badge">On Sale</span>
+      <div class="frame" data-images='["https://cdn.shopify.com/s/files/1/0598/0851/4221/files/231229_Ecru_003.jpg?v=1704644226&width=1000","https://cdn.shopify.com/s/files/1/0598/0851/4221/files/231229_Ecru_004.jpg?v=1704644226&width=1000","https://cdn.shopify.com/s/files/1/0598/0851/4221/files/231229_Ecru_025copy.jpg?v=1704643749&width=1000","https://cdn.shopify.com/s/files/1/0598/0851/4221/files/231229_Ecru_087.jpg?v=1704643749&width=1000"]'>
+        <div class="veil"></div><span class="quick">Discover</span>
+      </div>
+      <div class="meta"><h3>Frost Oversized Aviator Jacket</h3><span class="price"><s>&pound;95</s>&pound;65</span></div>
+      <div class="dots"></div>
+    </a>
+
+    <a class="card" href="https://ecrulabel.co.uk/products/sherpa-fleece-oversized-aviator-jacket-in-mushroom">
+      <div class="frame" data-images='["https://cdn.shopify.com/s/files/1/0598/0851/4221/products/221127_Ecru_108.jpg?v=1673527123&width=1000","https://cdn.shopify.com/s/files/1/0598/0851/4221/products/221127_Ecru_109.jpg?v=1673527123&width=1000","https://cdn.shopify.com/s/files/1/0598/0851/4221/products/221127_Ecru_115.jpg?v=1673527123&width=1000","https://cdn.shopify.com/s/files/1/0598/0851/4221/products/221127_Ecru_094.jpg?v=1673527123&width=1000"]'>
+        <div class="veil"></div><span class="quick">Discover</span>
+      </div>
+      <div class="meta"><h3>Oversized Aviator Jacket in Mushroom</h3><span class="price">&pound;149.99</span></div>
+      <div class="dots"></div>
+    </a>
+
+    <a class="card" href="https://ecrulabel.co.uk/products/vegan-leather-puffed-up-bomber-jacket">
+      <div class="frame" data-images='["https://cdn.shopify.com/s/files/1/0598/0851/4221/products/Puffbomber.png?v=1633251726&width=1000","https://cdn.shopify.com/s/files/1/0598/0851/4221/products/649cf5_11bd44e420024df985f2be14371ea4ca_mv2.jpg?v=1633251731&width=1000","https://cdn.shopify.com/s/files/1/0598/0851/4221/products/649cf5_b2362c12b7cd4c1c80587861ad980fcc_mv2.jpg?v=1633251737&width=1000"]'>
+        <div class="veil"></div><span class="quick">Discover</span>
+      </div>
+      <div class="meta"><h3>Vegan Leather Puffed Up Bomber Jacket</h3><span class="price">&pound;90</span></div>
+      <div class="dots"></div>
+    </a>
+
+    <a class="card" href="https://ecrulabel.co.uk/products/vegan-leather-cropped-gilet">
+      <div class="frame" data-images='["https://cdn.shopify.com/s/files/1/0598/0851/4221/products/Ecru_171.jpg?v=1668687628&width=1000","https://cdn.shopify.com/s/files/1/0598/0851/4221/products/221113_ECRU12918.jpg?v=1668687628&width=1000","https://cdn.shopify.com/s/files/1/0598/0851/4221/products/Ecru2204220359.jpg?v=1668687628&width=1000","https://cdn.shopify.com/s/files/1/0598/0851/4221/products/new.jpg?v=1668687628&width=1000"]'>
+        <div class="veil"></div><span class="quick">Discover</span>
+      </div>
+      <div class="meta"><h3>Vegan Faux Leather Cropped Gilet Puffer</h3><span class="price">&pound;60</span></div>
+      <div class="dots"></div>
+    </a>
+
+  </div>
+  <div class="sec-foot"><a class="view-all" href="https://ecrulabel.co.uk/collections/frontpage">View the full collection</a></div>
+</section>
+
+<!-- ================= VALUES ================= -->
+<section style="background:var(--bone)">
+  <div class="sec-head">
+    <span class="kicker">Why Ecru</span>
+    <h2>Quietly <em>Luxurious</em></h2>
+  </div>
+  <div class="values">
+    <div class="v"><div class="n">I.</div><h4>Designed in London</h4><p>Every silhouette is imagined and refined in-house, in London.</p></div>
+    <div class="v"><div class="n">II.</div><h4>Premium Textured Knit</h4><p>Custom-made fabrics with extreme stretch that sculpt, never cling.</p></div>
+    <div class="v"><div class="n">III.</div><h4>Worldwide Express</h4><p>Fast worldwide shipping, from our door to your occasion.</p></div>
+    <div class="v"><div class="n">IV.</div><h4>Multiway Design</h4><p>One piece, worn three ways. Pieces that live many nights out.</p></div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="brand">ECRU LABEL</div>
+  <p class="tag">Affordable luxury dresses, premium knit co-ords &amp; going-out sets &mdash; designed in London.</p>
+  <div class="cols">
+    <div>
+      <h5>Customer Care</h5>
+      <ul>
+        <li><a href="https://ecrulabel.co.uk/pages/shipping">Shipping Policy</a></li>
+        <li><a href="https://ecrulabel.co.uk/pages/exchanges">Exchange Policy</a></li>
+        <li><a href="https://ecrulabel.co.uk/pages/faq">FAQ</a></li>
+        <li><a href="mailto:contact@ecrulabel.co.uk">Contact Us</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>The Label</h5>
+      <ul>
+        <li><a href="https://ecrulabel.co.uk/pages/the-brand">About Us</a></li>
+        <li><a href="https://ecrulabel.co.uk/pages/press">Press</a></li>
+        <li><a href="https://ecrulabel.co.uk/products/ecru-label-gift-card">Gift Card</a></li>
+        <li><a href="https://ecrulabel.co.uk/account/login">Account</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Social</h5>
+      <ul>
+        <li><a href="https://www.instagram.com/ecrulabel/?hl=en">Instagram</a></li>
+        <li><a href="https://www.facebook.com/Ecru-Label-108610094399471/">Facebook</a></li>
+        <li><a href="https://mobile.twitter.com/ECRULABEL">Twitter</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="base">&copy; 2026 ECRU LABEL &mdash; Designed in London</div>
+</footer>
+
+<script>
+// ---------- Preloader ----------
+window.addEventListener('load',()=>{setTimeout(()=>document.getElementById('loader').classList.add('done'),1500)});
+setTimeout(()=>document.getElementById('loader').classList.add('done'),4200); // failsafe
+
+const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// ---------- Dreamy slow motion with seamless boomerang loop ----------
+// forward at 0.4x, then glide back in reverse — no hard restart, ever
+const RATE=0.4;
+const vids=[...document.querySelectorAll('video')];
+vids.forEach(v=>{
+  v.removeAttribute('loop');
+  v._dir=1; v._visible=true;
+  const slow=()=>{try{v.playbackRate=RATE}catch(e){}};
+  v.addEventListener('loadedmetadata',slow);
+  slow();
+  let last=null;
+  function reverseStep(ts){
+    if(v._dir!==-1)return;
+    if(!v._visible){last=null;requestAnimationFrame(reverseStep);return}
+    if(last==null)last=ts;
+    const dt=(ts-last)/1000; last=ts;
+    const t=v.currentTime-dt*RATE;
+    if(t<=0.05){v.currentTime=0.05;v._dir=1;last=null;v.play().catch(()=>{});return}
+    v.currentTime=t;
+    requestAnimationFrame(reverseStep);
+  }
+  v.addEventListener('timeupdate',()=>{
+    if(v._dir===1&&v.duration&&v.currentTime>=v.duration-0.1){
+      v._dir=-1;v.pause();last=null;requestAnimationFrame(reverseStep);
+    }
+  });
+});
+// only play the models the visitor can actually see (battery + smoothness)
+const vio=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    const v=e.target;
+    v._visible=e.isIntersecting;
+    if(e.isIntersecting){if(v._dir===1)v.play().catch(()=>{})}
+    else if(v._dir===1){v.pause()}
+  });
+},{threshold:.15});
+vids.forEach(v=>vio.observe(v));
+document.addEventListener('click',()=>vids.forEach(v=>{
+  const r=v.getBoundingClientRect();
+  if(r.bottom>0&&r.top<innerHeight&&v._dir===1)v.play().catch(()=>{});
+}),{once:true});
+
+// ---------- Hero arches entrance ----------
+document.querySelectorAll('.arch').forEach(a=>a.classList.add('show'));
+
+// ---------- Living photo cards (sets & outerwear) ----------
+document.querySelectorAll('.frame[data-images]').forEach((frame,idx)=>{
+  let imgs;
+  try{imgs=JSON.parse(frame.dataset.images)}catch(e){return}
+  const layers=imgs.map(src=>{
+    const d=document.createElement('div');
+    d.className='ph';
+    d.style.backgroundImage=`url("${src}")`;
+    frame.insertBefore(d,frame.firstChild);
+    return d;
+  });
+  const dotsWrap=frame.closest('.card').querySelector('.dots');
+  const dots=imgs.map(()=>{const b=document.createElement('i');if(dotsWrap)dotsWrap.appendChild(b);return b});
+  let cur=0;
+  const show=(i,dir)=>{
+    layers.forEach((l,j)=>{l.classList.toggle('on',j===i);l.classList.remove('zoomA','zoomB')});
+    void layers[i].offsetWidth;
+    layers[i].classList.add(dir?'zoomA':'zoomB');
+    dots.forEach((d,j)=>d.classList.toggle('on',j===i));
+  };
+  show(0,idx%2===0);
+  if(!reduced&&layers.length>1){
+    const period=6500+(idx%4)*900;
+    setTimeout(()=>{setInterval(()=>{cur=(cur+1)%layers.length;show(cur,(cur+idx)%2===0)},period)},(idx%5)*800);
+  }
+});
+
+// ---------- Scroll reveal ----------
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('inview');io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.card,.values .v').forEach((el,i)=>{el.style.transitionDelay=(i%4)*90+'ms';io.observe(el)});
+
+// ---------- Editorial parallax ----------
+const pls=[...document.querySelectorAll('[data-parallax]')];
+pls.forEach(p=>p.style.backgroundImage=`url("${p.dataset.bg}")`);
+if(!reduced){
+  let ticking=false;
+  window.addEventListener('scroll',()=>{
+    if(ticking)return;ticking=true;
+    requestAnimationFrame(()=>{
+      pls.forEach(p=>{
+        const r=p.parentElement.getBoundingClientRect();
+        if(r.bottom>0&&r.top<innerHeight){
+          const prog=(r.top+r.height/2-innerHeight/2)/innerHeight;
+          p.style.transform=`translateY(${prog*-60}px)`;
+        }
+      });
+      ticking=false;
+    });
+  },{passive:true});
+}
+</script>
+</body>
+</html>
